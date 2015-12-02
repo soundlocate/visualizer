@@ -8,8 +8,8 @@ function initScene() {
 
     scene = new THREE.Scene();
 
-    scene.fog = new THREE.Fog(0x111111, 150, 200);
-    root = new THREE.Object3D();
+    //scene.fog = new THREE.Fog(0x111111, 150, 200);
+    //root = new THREE.Object3D();
 
     //add outline cube, TODO: changeme to sth. better
     var geometryCube = cube(50);
@@ -62,7 +62,6 @@ function spawnBall(color, size, position) {
     var geometry = new THREE.SphereGeometry(size, 32, 32);
     var spawntime = new Date().getTime();
     var rgb = hsvToRgb(color * 235, 75, 75); //the color multiplyer of 235 gives us a more intuitive looking golor spectrum
-    var singleColor = (rgb.r << 16) + (rgb.g << 8) + (rgb.b);
 
     // create custom material from the shader code above
     //   that is within specially labeled script tags
@@ -89,13 +88,7 @@ function spawnBall(color, size, position) {
         fragmentShader: document.getElementById('fragmentShader').textContent,
         side: THREE.FrontSide,
         blending: THREE.AdditiveBlending,
-        transparent: true
-    });
-
-    var standartMaterial = new THREE.MeshBasicMaterial({
-        color: new THREE.Color(singleColor),
         transparent: true,
-        opacity: .7 //this gives us a little smoother spawning ;)
     });
 
     var object = new THREE.Mesh(geometry, customMaterial);
@@ -104,9 +97,9 @@ function spawnBall(color, size, position) {
 
     var spawnTime = new Date().getTime();
     var timer = setInterval(function () {
-        object.material.opacity = 1 - (new Date().getTime() - spawntime) / 2000.0; //lifetime in ms
-        //  object.position.x -= 1;
-        if (object.material.opacity <= 0) {
+        object.material.uniforms["c"].value = (new Date().getTime() - spawntime)*.5 / 5000.0; //lifetime in ms
+        //  object.position.x += 1;
+        if (object.material.uniforms["c"].value > .5) {
             scene.remove(object);
             clearInterval(timer);
         }
