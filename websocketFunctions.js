@@ -24,5 +24,7 @@ function onMessage(m) {
     var ball = JSON.parse(m.data);
     //console.log(ball);
     
-    spawnBall(ball.c, ball.s, ball.p);
+    var visual = ball.visual;
+    
+    spawnBall(visual.color, visual.size, visual.position);
 }

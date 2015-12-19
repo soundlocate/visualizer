@@ -97,11 +97,13 @@ function spawnBall(color, size, position) {
 
     var spawnTime = new Date().getTime();
     var timer = setInterval(function () {
-        object.material.uniforms["c"].value = (new Date().getTime() - spawntime)*.5 / 5000.0; //lifetime in ms
+        object.material.uniforms["c"].value = (new Date().getTime() - spawntime)*.3 / 5000.0; //lifetime in ms
         //  object.position.x += 1;
-        if (object.material.uniforms["c"].value > .5) {
+        if (object.material.uniforms["c"].value > .3) {
             scene.remove(object);
+            object = null;
             clearInterval(timer);
+            timer = null;
         }
     }, 10); //max update frequency in ms
 }
