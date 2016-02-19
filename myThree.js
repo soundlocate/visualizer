@@ -26,10 +26,10 @@ function initScene() {
     locator = new THREE.Mesh(new THREE.TetrahedronGeometry(10, 0), new THREE.MeshBasicMaterial({
         wireframe: true
     }));
-    /*locator.rotation.x = 360 / 2;
+    locator.rotation.x = 360 / 2;
     locator.position.set(0, 0, 0);
     locator.rotation.x = 360 / 2;
-    locator.rotation.y = 360 / 2;*/
+    locator.rotation.y = 360 / 2;
     scene.add(locator);
 
 
@@ -56,6 +56,8 @@ function initScene() {
         counter += 5;
     }, 10);
     */
+    
+    setInterval(crawlMap, 100);
 }
 
 function spawnBall(color, size, position) {
@@ -108,15 +110,27 @@ function spawnBall(color, size, position) {
     }, 10); //max update frequency in ms
 }
 
-var arrowMap = {};
-function spawnArrow(freq, x, y, z) {
-    console.log("spawnedArrow: ");
+var arrowMap = new Map(); //the map with the arrows inside
+function spawnArrow(freq, x, y, z) {    
+    var sourcePos = new THREE.Vector3(0, 0, 0);
+    var targetPos = new THREE.Vector3(x, y, z);
+    var direction = new THREE.Vector3().subVectors(targetPos, sourcePos);
+    var color = new THREE.Color();
+    color.setHSL(freq / 1000, 1, .5)
+    var arrow = new THREE.ArrowHelper(direction.clone().normalize(), sourcePos, 30, color);
     
-    console.log(freq);
-    console.log(x);
-    console.log(y);
-    console.log(z);
-    arrowMap[freq] = {freq: freq, time: new Date().getTime(), pos: {x: x, y: y, z: z}};
-    arrowMap[freq] = {freq: freq, time: new Date().getTime(), pos: {x: x, y: y, z: z}};
-    console.log(arrowMap);
+    scene.add(arrow);
+    if(arrowMap.get(freq) != undefined) {
+        scene.remove(arrowMap.get(freq).handle);
+    }
+    arrowMap.set(freq, {freq: freq, time: new Date().getTime(), handle: arrow, pos: {x: x, y: y, z: z}});
+}
+
+function crawlMap() {
+    for (var [key, value] of arrowMap) {
+      if(value.time + 5000 <= new Date().getTime()) {
+          scene.remove(value.handle);
+          arrowMap.delete(key);
+      }
+    }
 }
