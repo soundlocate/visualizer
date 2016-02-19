@@ -2,6 +2,7 @@ function connect() {
     //etablish websockets connection
     var server = getUrlParam("s");
     webSocket = new WebSocket("ws://" + (server != null ? server : "localhost:8080"));
+    webSocket.binaryType = 'arraybuffer';
     document.getElementById("container").innerHTML = '<div id="connecting">connecting...</div>';
     
     webSocket.onopen = onConnect;
@@ -21,10 +22,12 @@ function onError(e) {
 }
 
 function onMessage(m) {
-    var ball = JSON.parse(m.data);
-    //console.log(ball);
+    var data = m.data;
+    var dv = new DataView(data);
+    var freq = dv.getFloat64(0);
+    var x    = dv.getFloat64(8);
+    var y    = dv.getFloat64(16);
+    var z    = dv.getFloat64(24);
     
-    var visual = ball.visual;
-    
-    spawnBall(visual.color, visual.size, visual.position);
+    spawnArrow(freq, x, y, z);
 }

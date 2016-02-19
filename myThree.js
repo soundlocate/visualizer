@@ -26,10 +26,10 @@ function initScene() {
     locator = new THREE.Mesh(new THREE.TetrahedronGeometry(10, 0), new THREE.MeshBasicMaterial({
         wireframe: true
     }));
-    locator.rotation.x = 360 / 2;
+    /*locator.rotation.x = 360 / 2;
     locator.position.set(0, 0, 0);
     locator.rotation.x = 360 / 2;
-    locator.rotation.y = 360 / 2;
+    locator.rotation.y = 360 / 2;*/
     scene.add(locator);
 
 
@@ -106,4 +106,17 @@ function spawnBall(color, size, position) {
             timer = null;
         }
     }, 10); //max update frequency in ms
+}
+
+var arrowMap = {};
+function spawnArrow(freq, x, y, z) {
+    console.log("spawnedArrow: ");
+    
+    console.log(freq);
+    console.log(x);
+    console.log(y);
+    console.log(z);
+    arrowMap[freq] = {freq: freq, time: new Date().getTime(), pos: {x: x, y: y, z: z}};
+    arrowMap[freq] = {freq: freq, time: new Date().getTime(), pos: {x: x, y: y, z: z}};
+    console.log(arrowMap);
 }
