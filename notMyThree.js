@@ -1,7 +1,36 @@
+function loc() {
+
+    var geometry = new THREE.Geometry();
+    var home = new THREE.Vector3(0, 0, 0);
+    
+    var p1 = new THREE.Vector3(0 - 0.080829, 0 - 0.0571548, 0 - 0.14);
+    var p2 = new THREE.Vector3(0 - 0.080829, 0 - 0.0571548, 0.28 - 0.14);
+    var p3 = new THREE.Vector3(0.242487 - 0.080829, 0 - 0.0571548, 0.14 - 0.14);
+    var p4 = new THREE.Vector3(0.080829 - 0.080829, 0.228619 - 0.0571548, 0.14 - 0.14);
+
+    geometry.vertices.push(
+        home,
+        p1,
+
+        home,
+        p2,
+
+        home,
+        p3,
+
+        home,
+        p4,
+
+        home,
+        new THREE.Vector3(0, -.5, 0)
+ );
+
+    return geometry;
+
+}
+
 function cube(size) {
-
-    var h = size * 0.5;
-
+    var h = size * .5;
     var geometry = new THREE.Geometry();
 
     geometry.vertices.push(

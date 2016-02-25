@@ -28,6 +28,6 @@ function onMessage(m) {
     var x    = dv.getFloat64(8);
     var y    = dv.getFloat64(16);
     var z    = dv.getFloat64(24);
-    
-    spawnArrow(freq, x, y, z);
+    //if(freq == 500)
+        spawnArrow(freq, x, y, z);
 }

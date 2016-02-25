@@ -2,36 +2,64 @@ function initScene() {
     var WIDTH = window.innerWidth,
         HEIGHT = window.innerHeight;
 
-    camera = new THREE.PerspectiveCamera(60, WIDTH / HEIGHT, 1, 500);
+    camera = new THREE.PerspectiveCamera(.7, WIDTH / HEIGHT, 1, 500);
     camera.position.z = 150;
     camera.lookAt(0, 0, 0);
 
     scene = new THREE.Scene();
+    
+    lut = new THREE.Lut('rainbow', 1024);
+    lut.setMax( 1000 );
+    lut.setMin( 0 );
 
     //scene.fog = new THREE.Fog(0x111111, 150, 200);
     //root = new THREE.Object3D();
 
     //add outline cube, TODO: changeme to sth. better
-    var geometryCube = cube(50);
+//    var geometryCube = cube(50);
+//    geometryCube.computeLineDistances();
+//    var object = new THREE.LineSegments(geometryCube, new THREE.LineDashedMaterial({
+//        color: 0xffaa00,
+//        dashSize: 3,
+//        gapSize: 1,
+//        linewidth: 2
+//    }));
+//    scene.add(object);
+
+    //adding locator, TODO: rotate me right
+//    locator = new THREE.Mesh(new THREE.TetrahedronGeometry(10, 0), new THREE.MeshBasicMaterial({
+//        wireframe: true
+//    }));
+//    locator.rotation.x = 360 / 2;
+//    locator.position.set(0, 0, 0);
+//    locator.rotation.x = 360 / 2;
+//    locator.rotation.y = 360 / 2;
+//    scene.add(locator);
+    
+    //add loactor
+    var geometryCube = loc();
     geometryCube.computeLineDistances();
     var object = new THREE.LineSegments(geometryCube, new THREE.LineDashedMaterial({
-        color: 0xffaa00,
-        dashSize: 3,
-        gapSize: 1,
-        linewidth: 2
+        color: 0xffffff,
+        dashSize: .005,
+        gapSize: .003,
+        linewidth: 100
     }));
     scene.add(object);
 
-    //adding locator, TODO: rotate me right
-    locator = new THREE.Mesh(new THREE.TetrahedronGeometry(10, 0), new THREE.MeshBasicMaterial({
-        wireframe: true
-    }));
-    locator.rotation.x = 360 / 2;
-    locator.position.set(0, 0, 0);
-    locator.rotation.x = 360 / 2;
-    locator.rotation.y = 360 / 2;
-    scene.add(locator);
+    
+    /*var legend = lut.setLegendOn({'layout': 'vertical', position': { 'x': 1, 'y': 0, 'z': 0 }, 'dimensions': {'width': .1, 'height': .5}} );
+    scene.add (legend);
+    
+    var labels = lut.setLegendLabels( { 'title': 'Frequency', 'um': 'Hz', 'ticks': 3, 'fontsize': 10} );
 
+    scene.add (labels['title']);
+
+    for ( var i = 0; i < Object.keys( labels[ 'ticks' ] ).length; i++ ) {
+        scene.add ( labels[ 'ticks' ][ i ] );
+        scene.add ( labels[ 'lines' ][ i ] );
+    }*/
+    
 
     renderer = new THREE.WebGLRenderer({
         antialias: true
@@ -113,11 +141,12 @@ function spawnBall(color, size, position) {
 var arrowMap = new Map(); //the map with the arrows inside
 function spawnArrow(freq, x, y, z) {    
     var sourcePos = new THREE.Vector3(0, 0, 0);
-    var targetPos = new THREE.Vector3(x, y, z);
+    var targetPos = new THREE.Vector3(x - 0.080829, z - 0.0571548, y - 0.14);
+    
+    console.log(targetPos);
+    
     var direction = new THREE.Vector3().subVectors(targetPos, sourcePos);
-    var color = new THREE.Color();
-    color.setHSL(freq / 1000, 1, .5)
-    var arrow = new THREE.ArrowHelper(direction.clone().normalize(), sourcePos, 30, color);
+    var arrow = new THREE.ArrowHelper(direction.clone().normalize(), sourcePos, .3, lut.getColor(freq));
     
     scene.add(arrow);
     if(arrowMap.get(freq) != undefined) {
@@ -128,9 +157,9 @@ function spawnArrow(freq, x, y, z) {
 
 function crawlMap() {
     for (var [key, value] of arrowMap) {
-      if(value.time + 5000 <= new Date().getTime()) {
+      if(value.time + 1000 <= new Date().getTime()) {
           scene.remove(value.handle);
           arrowMap.delete(key);
       }
     }
-}
+}u
