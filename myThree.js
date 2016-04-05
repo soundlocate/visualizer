@@ -11,30 +11,6 @@ function initScene() {
     lut = new THREE.Lut('rainbow', 1024);
     lut.setMax( 1000 );
     lut.setMin( 0 );
-
-    //scene.fog = new THREE.Fog(0x111111, 150, 200);
-    //root = new THREE.Object3D();
-
-    //add outline cube, TODO: changeme to sth. better
-//    var geometryCube = cube(50);
-//    geometryCube.computeLineDistances();
-//    var object = new THREE.LineSegments(geometryCube, new THREE.LineDashedMaterial({
-//        color: 0xffaa00,
-//        dashSize: 3,
-//        gapSize: 1,
-//        linewidth: 2
-//    }));
-//    scene.add(object);
-
-    //adding locator, TODO: rotate me right
-//    locator = new THREE.Mesh(new THREE.TetrahedronGeometry(10, 0), new THREE.MeshBasicMaterial({
-//        wireframe: true
-//    }));
-//    locator.rotation.x = 360 / 2;
-//    locator.position.set(0, 0, 0);
-//    locator.rotation.x = 360 / 2;
-//    locator.rotation.y = 360 / 2;
-//    scene.add(locator);
     
     //add loactor
     var geometryCube = loc();
@@ -139,14 +115,13 @@ function spawnBall(color, size, position) {
 }
 
 var arrowMap = new Map(); //the map with the arrows inside
-function spawnArrow(freq, x, y, z) {    
-    var sourcePos = new THREE.Vector3(0, 0, 0);
-    var targetPos = new THREE.Vector3(x - 0.080829, z - 0.0571548, y - 0.14);
-    
+function spawnArrow(freq, x, y, z) {
+    var targetPos = new THREE.Vector3(x, z, y);
     console.log(targetPos);
-    
-    var direction = new THREE.Vector3().subVectors(targetPos, sourcePos);
-    var arrow = new THREE.ArrowHelper(direction.clone().normalize(), sourcePos, .3, lut.getColor(freq));
+
+    var geometry = new THREE.SphereGeometry(x, y, z);
+    var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+    var arrow = new THREE.Mesh( geometry, material );
     
     scene.add(arrow);
     if(arrowMap.get(freq) != undefined) {
@@ -162,4 +137,4 @@ function crawlMap() {
           arrowMap.delete(key);
       }
     }
-}u
+}

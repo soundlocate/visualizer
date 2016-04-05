@@ -9,18 +9,7 @@ function loc() {
     var p4 = new THREE.Vector3(0.080829 - 0.080829, 0.228619 - 0.0571548, 0.14 - 0.14);
 
     geometry.vertices.push(
-        home,
-        p1,
-
-        home,
-        p2,
-
-        home,
-        p3,
-
-        home,
-        p4,
-
+        /*@JAVA_MICS@*/
         home,
         new THREE.Vector3(0, -.5, 0)
  );
