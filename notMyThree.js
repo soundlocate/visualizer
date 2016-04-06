@@ -1,18 +1,46 @@
 function loc() {
 
     var geometry = new THREE.Geometry();
-    var home = new THREE.Vector3(0, 0, 0);
-    
-    var p1 = new THREE.Vector3(0 - 0.080829, 0 - 0.0571548, 0 - 0.14);
-    var p2 = new THREE.Vector3(0 - 0.080829, 0 - 0.0571548, 0.28 - 0.14);
-    var p3 = new THREE.Vector3(0.242487 - 0.080829, 0 - 0.0571548, 0.14 - 0.14);
-    var p4 = new THREE.Vector3(0.080829 - 0.080829, 0.228619 - 0.0571548, 0.14 - 0.14);
 
     geometry.vertices.push(
-        /*@JAVA_MICS@*/
-        home,
-        new THREE.Vector3(0, -.5, 0)
- );
+
+        new THREE.Vector3(0,0,0),
+        new THREE.Vector3(0, 0, size),
+
+        new THREE.Vector3(size,0,0),
+        new THREE.Vector3(size, 0, size),
+
+        new THREE.Vector3(0, size, 0),
+        new THREE.Vector3(0, size, size),
+
+        new THREE.Vector3(size,size,0),
+        new THREE.Vector3(size, size, size),
+
+        new THREE.Vector3(0,0,0),
+        new THREE.Vector3(size, 0, 0),
+
+        new THREE.Vector3(size,0,0),
+        new THREE.Vector3(0, size, 0),
+
+        new THREE.Vector3(0,size,0),
+        new THREE.Vector3(size, size, 0),
+
+        new THREE.Vector3(size,size,0),
+        new THREE.Vector3(0, 0, 0),
+
+        new THREE.Vector3(0,0,size),
+        new THREE.Vector3(size, 0, size),
+
+        new THREE.Vector3(size,0,size),
+        new THREE.Vector3(0, size, size),
+
+        new THREE.Vector3(0,size,size),
+        new THREE.Vector3(size, size, size),
+
+        new THREE.Vector3(size,size,size),
+        new THREE.Vector3(0, 0, 0),
+
+    );
 
     return geometry;
 

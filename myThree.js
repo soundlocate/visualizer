@@ -116,13 +116,14 @@ function spawnBall(color, size, position) {
 
 var arrowMap = new Map(); //the map with the arrows inside
 function spawnArrow(freq, x, y, z) {
+    var sourcePos = new THREE.Vector3(size / 2, size / 2, size / 2);
     var targetPos = new THREE.Vector3(x, z, y);
+
     console.log(targetPos);
 
-    var geometry = new THREE.SphereGeometry(x, y, z);
-    var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
-    var arrow = new THREE.Mesh( geometry, material );
-    
+    var direction = new THREE.Vector3().subVectors(targetPos, sourcePos);
+    var arrow = new THREE.ArrowHelper(direction.clone().normalize(), sourcePos, .3, lut.getColor(freq));
+
     scene.add(arrow);
     if(arrowMap.get(freq) != undefined) {
         scene.remove(arrowMap.get(freq).handle);
