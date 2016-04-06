@@ -1,44 +1,45 @@
 function loc() {
 
     var geometry = new THREE.Geometry();
+    var min = size / 2 * -1;
+    var max = size / 2;
 
     geometry.vertices.push(
+        new THREE.Vector3(min,min,min),
+        new THREE.Vector3(min, min, max),
 
-        new THREE.Vector3(0,0,0),
-        new THREE.Vector3(0, 0, size),
+        new THREE.Vector3(max,min,min),
+        new THREE.Vector3(max, min, max),
 
-        new THREE.Vector3(size,0,0),
-        new THREE.Vector3(size, 0, size),
+        new THREE.Vector3(min, max, min),
+        new THREE.Vector3(min, max, max),
 
-        new THREE.Vector3(0, size, 0),
-        new THREE.Vector3(0, size, size),
+        new THREE.Vector3(max,max,min),
+        new THREE.Vector3(max, max, max),
 
-        new THREE.Vector3(size,size,0),
-        new THREE.Vector3(size, size, size),
+        new THREE.Vector3(min,min,min),
+        new THREE.Vector3(max, min, min),
 
-        new THREE.Vector3(0,0,0),
-        new THREE.Vector3(size, 0, 0),
+        new THREE.Vector3(max,min,min),
+        new THREE.Vector3(max, max, min),
 
-        new THREE.Vector3(size,0,0),
-        new THREE.Vector3(size, size, 0),
+        new THREE.Vector3(min,max,min),
+        new THREE.Vector3(max, max, min),
 
-        new THREE.Vector3(0,size,0),
-        new THREE.Vector3(size, size, 0),
+        new THREE.Vector3(min,max,min),
+        new THREE.Vector3(min, min, min),
 
-        new THREE.Vector3(0,size,0),
-        new THREE.Vector3(0, 0, 0),
+        new THREE.Vector3(min,min,max),
+        new THREE.Vector3(max, min, max),
 
-        new THREE.Vector3(0,0,size),
-        new THREE.Vector3(size, 0, size),
+        new THREE.Vector3(max,min,max),
+        new THREE.Vector3(max, max, max),
 
-        new THREE.Vector3(size,0,size),
-        new THREE.Vector3(size, size, size),
+        new THREE.Vector3(min,max,max),
+        new THREE.Vector3(max, max, max),
 
-        new THREE.Vector3(0,size,size),
-        new THREE.Vector3(size, size, size),
-
-        new THREE.Vector3(0,size,size),
-        new THREE.Vector3(0, 0, size)
+        new THREE.Vector3(min,max,max),
+        new THREE.Vector3(min, min, max)
 
     );
 

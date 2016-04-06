@@ -18,8 +18,8 @@ function initScene() {
     var object = new THREE.LineSegments(geometryCube, new THREE.LineDashedMaterial({
         color: 0xffffff,
         dashSize: .005,
-        gapSize: .003,
-        linewidth: 100
+        gapSize: .005,
+        linewidth: 5
     }));
     scene.add(object);
 
@@ -116,8 +116,8 @@ function spawnBall(color, size, position) {
 
 var arrowMap = new Map(); //the map with the arrows inside
 function spawnArrow(freq, x, y, z) {
-    var sourcePos = new THREE.Vector3(size / 2, size / 2, size / 2);
-    var targetPos = new THREE.Vector3(x, y, z);
+    var sourcePos = new THREE.Vector3(0, 0, 0);
+    var targetPos = new THREE.Vector3(x - size / 2, y - size / 2, z - size / 2);
 
     console.log(targetPos);
 
