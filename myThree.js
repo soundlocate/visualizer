@@ -125,12 +125,18 @@ function spawnBall(color, size, position) {
 var arrowMap = new Map(); //the map with the arrows inside
 function spawnArrow(freq, x, y, z, amplitude) {
     var sourcePos = new THREE.Vector3(0, 0, 0);
-    var targetPos = new THREE.Vector3(x - size / 2 * -1, z - size / 2, y - size / 2);
+    var targetPos = new THREE.Vector3(y - size / 2, z - size / 2, x - size / 2);
 
     console.log(targetPos);
 
     var direction = new THREE.Vector3().subVectors(targetPos, sourcePos);
+    console.log(freq);
+    console.log(amplitude);
+
     var color = lut.getColor(freq);
+    console.log(color);
+    console.log(color.multiplyScalar(amplitude));
+
     var arrow = new THREE.ArrowHelper(direction.clone().normalize(), sourcePos, .3, color.multiplyScalar(amplitude));
 
     scene.add(arrow);
