@@ -23,10 +23,11 @@ function initScene() {
     scene.add(object);
 
     var geometry = new THREE.SphereGeometry( 0.01, 32, 32 );
-    var pos = -1 * size / 2;
-    geometry.setPosition(new THREE.Vector3(pos, pos, pos));
     var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
     var sphere = new THREE.Mesh( geometry, material );
+    var pos = -1 * size / 2;
+    sphere.position.set(pos, pos, pos);
+    console.log(sphere);
     scene.add(sphere);
 
     
