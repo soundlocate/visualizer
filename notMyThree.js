@@ -20,24 +20,24 @@ function loc() {
         new THREE.Vector3(size, 0, 0),
 
         new THREE.Vector3(size,0,0),
-        new THREE.Vector3(0, size, 0),
+        new THREE.Vector3(0, size, size),
 
         new THREE.Vector3(0,size,0),
         new THREE.Vector3(size, size, 0),
 
-        new THREE.Vector3(size,size,0),
+        new THREE.Vector3(0,size,0),
         new THREE.Vector3(0, 0, 0),
 
         new THREE.Vector3(0,0,size),
         new THREE.Vector3(size, 0, size),
 
         new THREE.Vector3(size,0,size),
-        new THREE.Vector3(0, size, size),
+        new THREE.Vector3(size, size, size),
 
         new THREE.Vector3(0,size,size),
         new THREE.Vector3(size, size, size),
 
-        new THREE.Vector3(size,size,size),
+        new THREE.Vector3(0,size,size),
         new THREE.Vector3(0, 0, 0)
 
     );
