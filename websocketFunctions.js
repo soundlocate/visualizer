@@ -22,10 +22,10 @@ function onError(e) {
 function onMessage(m) {
     var data = m.data;
     var dv = new DataView(data);
-    var freq = dv.getFloat64(0);
-    var x    = dv.getFloat64(8);
-    var y    = dv.getFloat64(16);
-    var z    = dv.getFloat64(24);
-    //if(freq == 500)
-        spawnArrow(freq, x, y, z);
+    var x    = dv.getFloat64(0);
+    var y    = dv.getFloat64(8);
+    var z    = dv.getFloat64(16);
+    var freq = dv.getFloat64(24);
+    var ampl = dv.getFloat64(32);
+    spawnArrow(freq, x, y, z, ampl);
 }
