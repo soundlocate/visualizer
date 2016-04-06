@@ -117,7 +117,7 @@ function spawnBall(color, size, position) {
 var arrowMap = new Map(); //the map with the arrows inside
 function spawnArrow(freq, x, y, z) {
     var sourcePos = new THREE.Vector3(size / 2, size / 2, size / 2);
-    var targetPos = new THREE.Vector3(x, z, y);
+    var targetPos = new THREE.Vector3(x, y, z);
 
     console.log(targetPos);
 
