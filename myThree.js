@@ -23,6 +23,13 @@ function initScene() {
     }));
     scene.add(object);
 
+    var geometry = new THREE.SphereGeometry( 0.01, 32, 32 );
+    var pos = -1 * size / 2;
+    geometry.setPosition(new THREE.Vector3(pos, pos, pos));
+    var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+    var sphere = new THREE.Mesh( geometry, material );
+    scene.add(sphere);
+
     
     /*var legend = lut.setLegendOn({'layout': 'vertical', position': { 'x': 1, 'y': 0, 'z': 0 }, 'dimensions': {'width': .1, 'height': .5}} );
     scene.add (legend);
@@ -117,7 +124,7 @@ function spawnBall(color, size, position) {
 var arrowMap = new Map(); //the map with the arrows inside
 function spawnArrow(freq, x, y, z, amplitude) {
     var sourcePos = new THREE.Vector3(0, 0, 0);
-    var targetPos = new THREE.Vector3(x - size / 2, z - size / 2, y - size / 2);
+    var targetPos = new THREE.Vector3(x - size / 2 * -1, z - size / 2, y - size / 2);
 
     console.log(targetPos);
 
