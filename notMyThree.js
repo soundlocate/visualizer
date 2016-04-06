@@ -38,7 +38,7 @@ function loc() {
         new THREE.Vector3(size, size, size),
 
         new THREE.Vector3(size,size,size),
-        new THREE.Vector3(0, 0, 0),
+        new THREE.Vector3(0, 0, 0)
 
     );
 
