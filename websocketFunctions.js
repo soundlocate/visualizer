@@ -1,6 +1,5 @@
 function connect() {
     //etablish websockets connection
-    var server = getUrlParam("s");
     webSocket = new WebSocket("ws:///*@JAVA_PORT@*/");
     webSocket.binaryType = 'arraybuffer';
     document.getElementById("container").innerHTML = '<div id="connecting">connecting...</div>';
