@@ -2,7 +2,7 @@ function connect() {
     //etablish websockets connection
     webSocket = new WebSocket("ws:///*@JAVA_PORT@*/");
     webSocket.binaryType = 'arraybuffer';
-    document.getElementById("container").innerHTML = '<div id="connecting">connecting...</div>';
+    document.getElementById("container").innerHTML = "sleep";
     webSocket.onopen = onConnect;
     webSocket.onerror = onError;
     webSocket.onclose = onError;
@@ -16,7 +16,7 @@ function onConnect() {
 }
     
 function onError(e) {
-    document.getElementById("container").innerHTML = '<div id="errorPic">An Error occured!</div>';
+    document.getElementById("container").innerHTML = '<div id="errorPic">sleep mode</div>';
 }
 
 function onMessage(m) {

@@ -1,5 +1,5 @@
 function initScene() {
-    var WIDTH = window.innerWidth,
+    var WIDTH = window.innerWidth, 
         HEIGHT = window.innerHeight;
 
     camera = new THREE.PerspectiveCamera(.7, WIDTH / HEIGHT, 1, 500);
@@ -125,19 +125,19 @@ var arrowMap = new Map(); //the map with the arrows inside
 function spawnArrow(freq, x, y, z, amplitude) {
     var sourcePos = new THREE.Vector3(0, 0, 0);
 
-    var targetPos = new THREE.Vector3(y - size / 2, z - size / 2, x - size / 2);
 
-    console.log(targetPos);
+    //var targetPos = new THREE.Vector3(y - size / 2, z - size / 2, x - size / 2);
+    var targetPos = new THREE.Vector3(y,z,x);
 
     var direction = new THREE.Vector3().subVectors(targetPos, sourcePos);
-    console.log(freq);
-    console.log(amplitude);
 
     var color = lut.getColor(freq);
-    console.log(color);
-    console.log(color.multiplyScalar(amplitude));
 
-    var arrow = new THREE.ArrowHelper(direction.clone().normalize(), sourcePos, .3, color.multiplyScalar(amplitude));
+    color.r *= amplitude * 20;
+    color.g *= amplitude * 20;
+    color.b *= amplitude * 20;
+
+    var arrow = new THREE.ArrowHelper(direction.clone().normalize(), sourcePos, .3, color);
 
     scene.add(arrow);
     if(arrowMap.get(freq) != undefined) {
@@ -148,7 +148,7 @@ function spawnArrow(freq, x, y, z, amplitude) {
 
 function crawlMap() {
     for (var [key, value] of arrowMap) {
-      if(value.time + 1000 <= new Date().getTime()) {
+      if(value.time + 300 <= new Date().getTime()) {
           scene.remove(value.handle);
           arrowMap.delete(key);
       }
